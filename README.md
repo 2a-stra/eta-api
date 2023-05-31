@@ -1,9 +1,9 @@
 
 # Specification of simple API to manage ETA (estimated time of arrival) of the ship to the destination point
 
-It is crucial for a transportation company that its vessels arrive on time to the destination point. Timely arrival has a significant impact on the business performance and key metrics of the company. Using our __API__ you could ensures customer satisfaction and enhances the company's reputation, as clients rely on the prompt delivery of their goods. __Estimation of time of arrival__ allows you better planning and resource allocation, optimizing fleet utilization and minimizing idle time. Ultimately, the ability to consistently deliver cargo on time contributes to increased productivity, profitability, and a competitive edge in the transportation industry.
+It is crucial for a transportation company that its vessels arrive on time at the destination point. Timely arrival has a significant impact on the business performance and key metrics of the company. Using our __API__ ensures customer satisfaction and enhances the company's reputation, as clients rely on the prompt delivery of their goods. __Estimating the time of arrival__ allows for better planning and resource allocation, optimizing fleet utilization and minimizing idle time. Ultimately, the ability to consistently deliver cargo on time contributes to increased productivity, profitability, and a competitive edge in the transportation industry.
 
-Our __API__ provides simple and effective approach for __estimation of time of arrival__. 
+Our __API__ provides simple and effective approach for the __estimation of time of arrival__.
 
 API specification consists of 4 requests using HTTP POST method:
 
@@ -36,14 +36,14 @@ __POST__ `/calculate_eta`
 ```json
 {
 	"route": [],
-	"avgSpeed": "string"
+	"avgSpeed": 20.5
 }
 ```
 
  Item | Description 
  --- | --- 
  route | list of planned route points 
- avgSpeed | Average speed estimation 
+ avgSpeed | Average speed estimation (float)
 
 ### Response
 
@@ -65,7 +65,7 @@ __POST__ `/calculate_eta`
 import requests
 
 data = {'route': [100, 200, 300],
-        'avgSpeed': "20"
+        'avgSpeed': 20.5
 }
 url = "http://<server>/calculate_eta"
 
@@ -75,7 +75,7 @@ r = requests.post(url, json=data)
 ### Request example (curl)
 
 ```bash
-curl -X POST -H "Content-type: application/json" -d "{\"route\" : [100, 200, 300], \"avgSpeed\" : \"20\"}" "localhost:8080/calculate_eta"
+curl -X POST -H "Content-type: application/json" -d "{\"route\" : [100, 200, 300], \"avgSpeed\" : 20.5}" "localhost:8080/calculate_eta"
 ```
 
 ## 2. Real ETA using real route specified by polyline in combination with remaining part of the planned route, time of departure and current time
@@ -92,8 +92,8 @@ __POST__ `/real_eta`
 {
 	"realRoute": [],
 	"remainRoute": [],
-	"departureTime": "2023-05-31T17:00:00",
-	"currentTime": "2023-05-31T13:30:00"
+	"departureTime": "2023-05-30T13:30:00",
+	"currentTime": "2023-05-31T17:00:00"
 }
 ```
 
@@ -131,7 +131,7 @@ __POST__ `/speed`
 
 ```json
 {
-	"speed": "string"
+	"speed": 20.2
 }
 ```
 
